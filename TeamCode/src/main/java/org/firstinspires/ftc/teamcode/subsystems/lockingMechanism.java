@@ -4,7 +4,6 @@ import static org.firstinspires.ftc.teamcode.subsystems.lockingConstants.default
 import static org.firstinspires.ftc.teamcode.subsystems.lockingConstants.extendedPos;
 
 import com.pedropathing.ivy.Command;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import dev.nextftc.hardware.RobotController;
 import dev.nextftc.hardware.actuators.NextServo;
@@ -16,11 +15,11 @@ public class lockingMechanism implements Mechanism {
     private NextServo lockingServo = new NextServo(RobotController.controlHub(), 0);
 
     public Command runLockingServo(){
-        return instant(() -> lockingServo.setPosition(extendedPos);
+        return instant(() -> lockingServo.setPosition(extendedPos));
     }
 
     public Command returnLockingServo(){
-        return instant(() -> lockingServo.setPosition(defaultPos);
+        return instant(() -> lockingServo.setPosition(defaultPos));
     }
 
 }
