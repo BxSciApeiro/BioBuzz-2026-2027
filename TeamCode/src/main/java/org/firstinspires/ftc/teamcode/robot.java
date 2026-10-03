@@ -18,9 +18,20 @@ public class robot implements NextRobot {
     intake intake = new intake();
     lockingMechanism locker = new lockingMechanism();
     public Follower follower;
+
     @Override
     public Set<Mechanism> getMechanisms() {
         return Set.of(shooter, intake, locker);
+    }
+
+    public intake getIntake() {
+        return intake;
+    }
+    public shooter getShooter() {
+        return shooter;
+    }
+    public lockingMechanism getLocker() {
+        return locker;
     }
 
 //    public Follower getFollower() {

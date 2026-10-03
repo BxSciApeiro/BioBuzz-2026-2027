@@ -43,4 +43,11 @@ public class shooter implements Mechanism {
         return instant(() -> pollenShooter.setVelocitySetpoint(offVelocity));
     }
 
+    public Command testShoot() {
+        return instant(() -> pollenShooter.setThrottle(0.5));
+    }
+    public Command testStop() {
+        return instant(() -> pollenShooter.setThrottle(0));
+    }
+
 }
