@@ -12,6 +12,7 @@ import com.pedropathing.ivy.Command;
 
 import dev.nextftc.hardware.actuators.NextMotor;
 import dev.nextftc.robot.Mechanism;
+import dev.nextftc.robot.Telemetry;
 import dev.nextftc.units.Units;
 import dev.nextftc.units.measuretypes.AngularVelocity;
 import kotlin.Unit;
@@ -27,10 +28,10 @@ public class shooter implements Mechanism {
     }
 
     public void calculatePower(double distance) {
-        double voy = Math.sqrt(2*g*h);
-        double vox = (distance*g)/(Math.sqrt(2*g*h));
+        double voy = Math.sqrt(2*g*h); //inches/s
+        double vox = (distance*g)/(Math.sqrt(2*g*h)); // inches /s
 
-        double rotationalVelocity = Math.sqrt(Math.pow(voy,2)+Math.pow(vox, 2))*radius; //theta/s
+        double rotationalVelocity = (Math.sqrt(Math.pow(voy,2)+Math.pow(vox, 2)))/radius; //theta/s
 
         tps = new AngularVelocity(rotationalVelocity * (ticksperrev/(2*(Math.PI))), Units.RadiansPerSecond);
     }
@@ -41,6 +42,14 @@ public class shooter implements Mechanism {
 
     public Command stop() {
         return instant(() -> pollenShooter.setVelocitySetpoint(offVelocity));
+    }
+
+    @Override
+    public void periodic() {
+        Telemetry.log("shooter position ", pollenShooter.getAbsoluteEncoderPosition());
+        Telemetry.log("shooter vel", pollenShooter.getEncoderVelocity());
+        calculatePower(10);
+        Telemetry.log("tps", tps.getMagnitude());
     }
 
 }
