@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.opModes.teleOps;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
+
 import org.firstinspires.ftc.teamcode.robot;
 
 import dev.nextftc.robot.Telemetry;
@@ -13,7 +16,7 @@ public class teleOp extends NextOpMode {
     private final robot robot;
 
     public teleOp(robot robot ) {
-        super (robot );
+        super(robot);
         this.robot = robot;
     }
 
@@ -32,6 +35,14 @@ public class teleOp extends NextOpMode {
 
         gp1.a().toggleOnFalse(robot.getLocker().runLockingServo());
         gp1.a().toggleOnFalse(robot.getLocker().runLockingServo());
+
+        gp2.a().toggleOnTrue(robot.getTransfer().turnOn());
+        gp2.a().toggleOnFalse(robot.getTransfer().turnOff());
+
+        gp2.y().toggleOnTrue(robot.getSlapdown().GoUp());
+        gp2.x().toggleOnTrue(robot.getSlapdown().GoDown());
+
+
 
 
     }
