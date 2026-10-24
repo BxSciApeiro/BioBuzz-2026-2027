@@ -8,8 +8,9 @@ import org.firstinspires.ftc.teamcode.subsystems.Constants.transferConstants;
 import dev.nextftc.hardware.actuators.NextCRServo;
 import dev.nextftc.hardware.actuators.NextMotor;
 import dev.nextftc.robot.Mechanism;
+import dev.nextftc.robot.opmode.NextTeleop;
 
-@TeleOp
+@NextTeleop
 public class transfer implements Mechanism {
     private final NextCRServo geckoWheels = new NextCRServo("GeckoWheels");
     public Command turnOn(){
