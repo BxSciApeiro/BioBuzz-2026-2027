@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.*;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.*;
 import com.pedropathing.ivy.Command;
 import dev.nextftc.hardware.actuators.NextMotor;
 import dev.nextftc.robot.Mechanism;
 import dev.nextftc.robot.Telemetry;
+import dev.nextftc.robot.opmode.NextTeleop;
 import dev.nextftc.units.Units;
 import dev.nextftc.units.measuretypes.AngularVelocity;
 
@@ -55,6 +56,8 @@ public class shooter implements Mechanism {
      */
     public Command testShoot() {
         return instant(() -> pollenShooter.setThrottle(0.5));
+    }
+
     public void setVelocity(double vel) {
         pollenShooter.setVelocitySetpoint(new AngularVelocity(vel, Units.RadiansPerSecond));
     }
@@ -64,8 +67,8 @@ public class shooter implements Mechanism {
      * @return {@link Command} that sets shooter power to 0
      */
     public Command testStop() {
-        return instant(() -> pollenShooter.setThrottle(0));
-
+            return instant(() -> pollenShooter.setThrottle(0));
+    }
 
     public double getEncoderVel() {
         return pollenShooter.getEncoderVelocity().getMagnitude();

@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.opModes.teleOps;
 
 import static com.bylazar.telemetry.PanelsTelemetry.INSTANCE;
 import static com.pedropathing.ivy.commands.Commands.instant;
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.target;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.target;
 import com.bylazar.telemetry.TelemetryManager;
 
 import org.firstinspires.ftc.teamcode.robot;

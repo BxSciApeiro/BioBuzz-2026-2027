@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.opModes.teleOps;
+import com.pedropathing.ivy.commands.Commands;
+
 import org.firstinspires.ftc.teamcode.robot;
 
 import dev.nextftc.robot.Telemetry;
+import dev.nextftc.robot.drive.DriveCommands;
 import dev.nextftc.robot.opmode.NextOpMode;
 import dev.nextftc.robot.opmode.NextTeleop;
 import dev.nextftc.robot.triggers.CommandGamepad;
@@ -24,35 +27,32 @@ public class teleOp extends NextOpMode {
         CommandGamepad gp2 = new CommandGamepad(gamepad2);
 
         //// Intake mechanism gamepad Bindings
-        gp1.leftBumper().onTrue(robot.getIntake().runIntake());
-        gp1.rightBumper().onTrue(robot.getIntake().runBackwards());
+        gp1.leftBumper().onTrue(robot.intake.runIntake());
+        gp1.rightBumper().onTrue(robot.intake.runBackwards());
 
         //// Shooting mechanism gamepad Bindings
-        gp1.b().onTrue(robot.getShooter().testShoot());
-        gp1.b().onFalse(robot.getShooter().testStop());
+        gp1.b().onTrue(robot.shooter.testShoot());
+        gp1.b().onFalse(robot.shooter.testStop());
 
-        //// Locker/Sorting Mechanism gamepad bindings
-        gp1.a().toggleOnFalse(robot.getLocker().runLockingServo());
-        gp1.a().toggleOnFalse(robot.getLocker().runLockingServo());
 
         //// Transfer/Hopper system gamepad bindings
-        gp2.a().toggleOnTrue(robot.getTransfer().turnOn());
-        gp2.a().toggleOnFalse(robot.getTransfer().turnOff());
+        gp2.a().toggleOnTrue(robot.transfer.turnOn());
+        gp2.a().toggleOnFalse(robot.transfer.turnOff());
 
         //// Slap down mechanism gamepad bindings
-        gp2.y().toggleOnTrue(robot.getSlapdown().GoUp());
-        gp2.x().toggleOnTrue(robot.getSlapdown().GoDown());
+        gp2.y().toggleOnTrue(robot.slapdown.GoUp());
+        gp2.x().toggleOnTrue(robot.slapdown.GoDown());
 
         //// Drivetrain mechanism  bindings or smth like that
-        robot.getDrivetrain().startDrive(gamepad1);
+        robot.drivetrain.startDrive(gamepad1);
 
         DriveCommands.mecanumDriveFieldCentric(
-                robot.getDrivetrain().frontLeft,
-                robot.getDrivetrain().frontRight,
-                robot.getDrivetrain().backLeft,
-                robot.getDrivetrain().backRight,
+                robot.drivetrain.frontLeft,
+                robot.drivetrain.frontRight,
+                robot.drivetrain.backLeft,
+                robot.drivetrain.backRight,
                 gamepad1,
-                () -> follower.getPose().getHeading()
+                () -> robot.follower.localizer.pose().heading()
         ).schedule();
 
         gp2.leftBumper().whileTrue(

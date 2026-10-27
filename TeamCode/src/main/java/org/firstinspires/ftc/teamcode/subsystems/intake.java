@@ -1,8 +1,9 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 
-import static org.firstinspires.ftc.teamcode.subsystems.IntakeConstants.maxPower;
-import static org.firstinspires.ftc.teamcode.subsystems.IntakeConstants.noPower;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.IntakeConstants.maxPower;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.IntakeConstants.noPower;
+
 
 import com.pedropathing.ivy.Command;
 
