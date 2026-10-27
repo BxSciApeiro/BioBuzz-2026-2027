@@ -14,9 +14,9 @@ import dev.nextftc.robot.Mechanism;
 import dev.nextftc.robot.NextRobot;
 
 public class robot implements NextRobot {
-    shooter shooter = new shooter();
-    intake intake = new intake();
-    lockingMechanism locker = new lockingMechanism();
+    public shooter shooter = new shooter();
+    public intake intake = new intake();
+    public lockingMechanism locker = new lockingMechanism();
     public Follower follower;
 
     @Override

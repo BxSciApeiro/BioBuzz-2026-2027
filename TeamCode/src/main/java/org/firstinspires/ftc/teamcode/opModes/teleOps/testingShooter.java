@@ -3,8 +3,6 @@ package org.firstinspires.ftc.teamcode.opModes.teleOps;
 import static com.bylazar.telemetry.PanelsTelemetry.INSTANCE;
 import static com.pedropathing.ivy.commands.Commands.instant;
 import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.target;
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.tps;
-
 import com.bylazar.telemetry.TelemetryManager;
 
 import org.firstinspires.ftc.teamcode.robot;
@@ -14,8 +12,7 @@ import dev.nextftc.robot.opmode.BulkReadHook;
 import dev.nextftc.robot.opmode.NextOpMode;
 import dev.nextftc.robot.opmode.NextTeleop;
 import dev.nextftc.robot.triggers.CommandGamepad;
-import dev.nextftc.units.Units;
-import dev.nextftc.units.measuretypes.AngularVelocity;
+
 
 @NextTeleop(name = "Testing Shooter, U should reupload to test others")
 public class testingShooter extends NextOpMode {

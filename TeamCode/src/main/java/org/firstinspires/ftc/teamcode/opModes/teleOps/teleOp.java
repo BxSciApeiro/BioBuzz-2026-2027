@@ -27,8 +27,6 @@ public class teleOp extends NextOpMode {
         gp1.leftBumper().onTrue(robot.getIntake().runIntake());
         gp1.rightBumper().onTrue(robot.getIntake().runBackwards());
 
-        gp1.b().onTrue(robot.getShooter().testShoot());
-        gp1.b().onFalse(robot.getShooter().testStop());
 
         gp1.a().toggleOnFalse(robot.getLocker().runLockingServo());
         gp1.a().toggleOnFalse(robot.getLocker().runLockingServo());
