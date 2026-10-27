@@ -4,10 +4,15 @@ import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.g;
 import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.h;
 import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.nectarkV;
 import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.offVelocity;
+import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.pollenD;
+import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.pollenP;
 import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.pollenkV;
 import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.radius;
+import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.target;
 import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.ticksperrev;
 import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.tps;
+import static com.bylazar.telemetry.PanelsTelemetry.INSTANCE;
+import com.bylazar.telemetry.TelemetryManager;
 import com.pedropathing.ivy.Command;
 
 import dev.nextftc.hardware.actuators.NextMotor;
@@ -23,7 +28,7 @@ public class shooter implements Mechanism {
     public NextMotor nectarShooter = new NextMotor("nectarShooter");
 
     public shooter() {
-        pollenShooter.getVelocityConstants().withV(pollenkV);
+        pollenShooter.getVelocityConstants().withV(pollenkV).withP(pollenP).withD(pollenD);
         nectarShooter.getVelocityConstants().withV(nectarkV);
     }
 
@@ -44,12 +49,24 @@ public class shooter implements Mechanism {
         return instant(() -> pollenShooter.setVelocitySetpoint(offVelocity));
     }
 
+    public void setVelocity(double vel) {
+        pollenShooter.setVelocitySetpoint(new AngularVelocity(vel, Units.RadiansPerSecond));
+    }
+
+
+    public double getEncoderVel() {
+        return pollenShooter.getEncoderVelocity().getMagnitude();
+    }
+
     @Override
     public void periodic() {
-        Telemetry.log("shooter position ", pollenShooter.getAbsoluteEncoderPosition());
+        pollenShooter.getVelocityConstants().setKV(pollenkV);
+        pollenShooter.getVelocityConstants().setKP(pollenP);
+        pollenShooter.getVelocityConstants().setKD(pollenD);
+        pollenShooter.update();
         Telemetry.log("shooter vel", pollenShooter.getEncoderVelocity());
-        calculatePower(10);
         Telemetry.log("tps", tps.getMagnitude());
+        Telemetry.update();
     }
 
 }
