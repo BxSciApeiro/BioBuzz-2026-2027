@@ -11,7 +11,7 @@ import dev.nextftc.robot.opmode.NextTeleop;
 
 @NextTeleop
 public class Drivetrain implements Mechanism {
-
+    ////Pretty much all done by pedro-pathing (Commentator did not read)
     public final NextMotor frontLeft = new NextMotor("frontLeft");
     public final NextMotor frontRight = new NextMotor("frontRight");
     public final NextMotor backLeft = new NextMotor("backLeft");

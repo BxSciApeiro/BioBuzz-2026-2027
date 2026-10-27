@@ -1,31 +1,39 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static com.pedropathing.ivy.commands.Commands.instant;
-
-import static org.firstinspires.ftc.teamcode.subsystems.IntakeConstants.maxPower;
-import static org.firstinspires.ftc.teamcode.subsystems.IntakeConstants.noPower;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.IntakeConstants.maxPower;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.IntakeConstants.noPower;
 
 import com.pedropathing.ivy.Command;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import dev.nextftc.hardware.RobotController;
 import dev.nextftc.hardware.actuators.NextMotor;
 import dev.nextftc.robot.Mechanism;
 import dev.nextftc.robot.opmode.NextTeleop;
 
-import org.firstinspires.ftc.teamcode.subsystems.IntakeConstants;
 @NextTeleop
 public class intake implements Mechanism {
-    private NextMotor intakeMotor = new NextMotor(RobotController.controlHub(), 0);
+    private NextMotor intakeMotor = new NextMotor("intake Motor");
 
+    /**
+     * Creates a command that sets the intake motor forwards
+     * @return {@link Command} that sets the throttle to a variable
+     */
     public Command runIntake(){
         return instant(() -> intakeMotor.setThrottle(maxPower));
     }
+
+    /**
+     * Creates a command that sets that runs the intake motor backwards
+     * @return {@link Command} that sets the throttle to a variable inversed
+     */
     public Command runBackwards(){
         return instant(() -> intakeMotor.setThrottle(-maxPower));
     }
+
+    /**
+     * Creates a command that stops the intake motor
+     * @return {@link Command} that sets the throttle to 0
+     */
     public Command stopIntake(){
         return instant(() -> intakeMotor.setThrottle(noPower));
     }

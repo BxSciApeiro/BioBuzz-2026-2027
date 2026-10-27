@@ -17,6 +17,7 @@ import dev.nextftc.robot.Mechanism;
 import dev.nextftc.robot.NextRobot;
 
 public class robot implements NextRobot {
+    //// Add the mechanisms that MAKE the robot
     shooter shooter = new shooter();
     intake intake = new intake();
     lockingMechanism locker = new lockingMechanism();
@@ -29,11 +30,16 @@ public class robot implements NextRobot {
 
     public Follower follower;
 
+    /**
+     * Creates a method that returns a set of all the mechanisms on our robot
+     * @return {@link Set<Mechanism>} with all the subsystems on our bot
+     */
     @Override
     public Set<Mechanism> getMechanisms() {
         return Set.of(shooter, intake, locker, slapdown,Transfer, drivetrain );
     }
 
+    //// Allow other classes (most definitely TeleOp) to access the mechanisms/robot and use the robot.
     public intake getIntake() {
         return intake;
     }
@@ -45,8 +51,6 @@ public class robot implements NextRobot {
     }
     public transfer getTransfer(){return Transfer;}
     public slapDown getSlapdown(){return slapdown;}
-
-
     public Drivetrain getDrivetrain(){return drivetrain;}
 //    public Follower getFollower() {
 ////        if (follower == null) {

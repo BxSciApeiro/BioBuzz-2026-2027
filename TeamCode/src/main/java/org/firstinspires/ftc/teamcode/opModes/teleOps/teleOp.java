@@ -36,21 +36,27 @@ public class teleOp extends NextOpMode {
         CommandGamepad gp1 = new CommandGamepad(gamepad1);
         CommandGamepad gp2 = new CommandGamepad(gamepad2);
 
+        //// Intake mechanism gamepad Bindings
         gp1.leftBumper().onTrue(robot.getIntake().runIntake());
         gp1.rightBumper().onTrue(robot.getIntake().runBackwards());
 
+        //// Shooting mechanism gamepad Bindings
         gp1.b().onTrue(robot.getShooter().testShoot());
         gp1.b().onFalse(robot.getShooter().testStop());
 
+        //// Locker/Sorting Mechanism gamepad bindings
         gp1.a().toggleOnFalse(robot.getLocker().runLockingServo());
         gp1.a().toggleOnFalse(robot.getLocker().runLockingServo());
 
+        //// Transfer/Hopper system gamepad bindings
         gp2.a().toggleOnTrue(robot.getTransfer().turnOn());
         gp2.a().toggleOnFalse(robot.getTransfer().turnOff());
 
+        //// Slap down mechanism gamepad bindings
         gp2.y().toggleOnTrue(robot.getSlapdown().GoUp());
         gp2.x().toggleOnTrue(robot.getSlapdown().GoDown());
 
+        //// Drivetrain mechanism  bindings or smth like that
         robot.getDrivetrain().startDrive(gamepad1);
 
         DriveCommands.mecanumDriveFieldCentric(
@@ -66,7 +72,9 @@ public class teleOp extends NextOpMode {
                 Commands.infinite(() -> DriveCommands.setScalar(0.4))
                         .setEnd(end -> DriveCommands.setScalar(1.0))
         );
-
+        /*
+        Total mechanisms listed: 6/6
+         */
 
 
     }

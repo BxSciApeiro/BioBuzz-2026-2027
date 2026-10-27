@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.teamcode.subsystems.lockingConstants.defaultPos;
-import static org.firstinspires.ftc.teamcode.subsystems.lockingConstants.extendedPos;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.lockingConstants.defaultPos;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.lockingConstants.extendedPos;
 
 import com.pedropathing.ivy.Command;
 
@@ -12,12 +12,20 @@ import dev.nextftc.robot.opmode.NextTeleop;
 
 @NextTeleop
 public class lockingMechanism implements Mechanism {
-    private NextServo lockingServo = new NextServo(RobotController.controlHub(), 0);
+    private NextServo lockingServo = new NextServo("Locking Servo");
 
+    /**
+     * Creates a command that extends the rack and pinion
+     * @return {@link Command} that sets the position to extend the rack and pinion
+     */
     public Command runLockingServo(){
         return instant(() -> lockingServo.setPosition(extendedPos));
     }
 
+    /**
+     * Creates a command that retrieves the rack and pinion
+     * @return {@link Command} that sets the position to retrieve the rack and pinion
+     */
     public Command returnLockingServo(){
         return instant(() -> lockingServo.setPosition(defaultPos));
     }

@@ -12,10 +12,21 @@ import dev.nextftc.robot.opmode.NextTeleop;
 
 @NextTeleop
 public class slapDown implements Mechanism {
+
     private final NextServo slapDown = new NextServo("SlapDown");
+
+    /**
+     * Makes the slapdown go up
+     * @return Command
+     */
     public Command GoUp(){
         return instant(() -> slapDown.setPosition(slapDownConstants.TopPos));
     }
+
+    /**
+     * Makes the slapdown go down.
+     * @return Command
+     */
     public Command GoDown(){
         return instant(()-> slapDown.setPosition(slapDownConstants.BottomPos));
     }
