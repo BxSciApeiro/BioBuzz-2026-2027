@@ -6,7 +6,6 @@ import com.pedropathing.ivy.Command;
 import org.firstinspires.ftc.teamcode.subsystems.Constants.transferConstants;
 
 import dev.nextftc.hardware.actuators.NextCRServo;
-import dev.nextftc.hardware.actuators.NextMotor;
 import dev.nextftc.robot.Mechanism;
 
 @TeleOp

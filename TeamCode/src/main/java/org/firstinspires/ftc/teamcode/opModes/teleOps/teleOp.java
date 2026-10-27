@@ -1,8 +1,4 @@
 package org.firstinspires.ftc.teamcode.opModes.teleOps;
-
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
-
 import org.firstinspires.ftc.teamcode.robot;
 
 import dev.nextftc.robot.Telemetry;
@@ -27,18 +23,14 @@ public class teleOp extends NextOpMode {
         CommandGamepad gp1 = new CommandGamepad(gamepad1);
         CommandGamepad gp2 = new CommandGamepad(gamepad2);
 
-        gp1.leftBumper().onTrue(robot.getIntake().runIntake());
-        gp1.rightBumper().onTrue(robot.getIntake().runBackwards());
+        gp1.leftBumper().onTrue(robot.intake.runIntake());
+        gp1.rightBumper().onTrue(robot.intake.runBackwards());
 
+        gp2.a().toggleOnTrue(robot.transfer.turnOn());
+        gp2.a().toggleOnFalse(robot.transfer.turnOff());
 
-        gp1.a().toggleOnFalse(robot.getLocker().runLockingServo());
-        gp1.a().toggleOnFalse(robot.getLocker().runLockingServo());
-
-        gp2.a().toggleOnTrue(robot.getTransfer().turnOn());
-        gp2.a().toggleOnFalse(robot.getTransfer().turnOff());
-
-        gp2.y().toggleOnTrue(robot.getSlapdown().GoUp());
-        gp2.x().toggleOnTrue(robot.getSlapdown().GoDown());
+        gp2.y().toggleOnTrue(robot.slapdown.GoUp());
+        gp2.x().toggleOnTrue(robot.slapdown.GoDown());
 
 
 

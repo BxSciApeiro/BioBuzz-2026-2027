@@ -1,29 +1,15 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.g;
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.h;
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.nectarkV;
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.offVelocity;
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.pollenD;
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.pollenP;
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.pollenkV;
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.radius;
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.target;
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.ticksperrev;
-import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.tps;
-import static com.bylazar.telemetry.PanelsTelemetry.INSTANCE;
-import com.bylazar.telemetry.TelemetryManager;
+import static org.firstinspires.ftc.teamcode.subsystems.shooterConstant.*;
 import com.pedropathing.ivy.Command;
-
 import dev.nextftc.hardware.actuators.NextMotor;
 import dev.nextftc.robot.Mechanism;
 import dev.nextftc.robot.Telemetry;
 import dev.nextftc.units.Units;
 import dev.nextftc.units.measuretypes.AngularVelocity;
-import kotlin.Unit;
 
 public class shooter implements Mechanism {
-    public NextMotor pollenShooter = new NextMotor("pollenShooter");
+    public NextMotor pollenShooter = new NextMotor("pollenShooter", anglePerCount);
 
     public NextMotor nectarShooter = new NextMotor("nectarShooter");
 
