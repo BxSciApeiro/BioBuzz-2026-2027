@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.subsystems;
+package org.firstinspires.ftc.teamcode.subsystems.Constants;
 
 public class IntakeConstants {
     public static double maxPower = 1.0;
