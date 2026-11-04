@@ -1,4 +1,8 @@
 package org.firstinspires.ftc.teamcode.opModes.teleOps;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.pollenP;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.pollenD;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.pollenkV;
+
 import com.pedropathing.ivy.commands.Commands;
 
 import org.firstinspires.ftc.teamcode.robot;
@@ -43,22 +47,8 @@ public class teleOp extends NextOpMode {
         gp2.y().toggleOnTrue(robot.slapdown.GoUp());
         gp2.x().toggleOnTrue(robot.slapdown.GoDown());
 
-        //// Drivetrain mechanism  bindings or smth like that
-        robot.drivetrain.startDrive(gamepad1);
+        robot.pedro.follower().manual(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
-        DriveCommands.mecanumDriveFieldCentric(
-                robot.drivetrain.frontLeft,
-                robot.drivetrain.frontRight,
-                robot.drivetrain.backLeft,
-                robot.drivetrain.backRight,
-                gamepad1,
-                () -> robot.follower.localizer.pose().heading()
-        ).schedule();
-
-        gp2.leftBumper().whileTrue(
-                Commands.infinite(() -> DriveCommands.setScalar(0.4))
-                        .setEnd(end -> DriveCommands.setScalar(1.0))
-        );
         /*
         Total mechanisms listed: 6/6
          */
@@ -69,5 +59,8 @@ public class teleOp extends NextOpMode {
     @Override
     public void periodic() {
         Telemetry.log("RUNNING");
+        robot.pedro.follower().update();
+        double distance = robot.pedro.follower().pose().y();
+        robot.shooter.calculatePower(10);
     }
 }

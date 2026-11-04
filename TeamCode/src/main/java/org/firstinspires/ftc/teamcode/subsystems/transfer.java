@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.pedropathing.ivy.Command;
 
 import org.firstinspires.ftc.teamcode.subsystems.Constants.transferConstants;
@@ -11,14 +10,14 @@ import dev.nextftc.robot.opmode.NextTeleop;
 
 @NextTeleop
 public class transfer implements Mechanism {
-    private final NextCRServo geckoWheels = new NextCRServo("GeckoWheels");
+    private final NextCRServo transfer = new NextCRServo("transfer");
 
     /**
      * Turn on transfer mechanism (hopper)
      * @return Command
      */
     public Command turnOn(){
-        return instant(() -> geckoWheels.setPower(transferConstants.MaxThrottle));
+        return instant(() -> transfer.setPower(transferConstants.MaxThrottle));
     }
 
     /**
@@ -26,7 +25,7 @@ public class transfer implements Mechanism {
      * @return Command
      */
     public Command turnOff(){
-        return instant(() -> geckoWheels.setPower(transferConstants.turnOff));
+        return instant(() -> transfer.setPower(transferConstants.turnOff));
 
     }
 
@@ -35,7 +34,7 @@ public class transfer implements Mechanism {
      * @return Command
      */
     public Command MoveBackwards(){
-        return instant(() -> geckoWheels.setPower(-(transferConstants.MaxThrottle)));
+        return instant(() -> transfer.setPower(-(transferConstants.MaxThrottle)));
     }
 
 

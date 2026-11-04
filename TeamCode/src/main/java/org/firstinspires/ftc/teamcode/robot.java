@@ -16,23 +16,24 @@ import java.util.Set;
 import dev.nextftc.hardware.RobotController;
 import dev.nextftc.robot.Mechanism;
 import dev.nextftc.robot.NextRobot;
+import dev.nextftc.v2.pedro.PedroMechanism;
 
 public class robot implements NextRobot {
     //// Add the mechanisms that MAKE the robot
     public slapDown slapdown = new slapDown();
     public shooter shooter = new shooter();
     public intake intake = new intake();
-    public Drivetrain drivetrain = new Drivetrain();
-    public Follower follower = Constants.create(RobotController.hardwareMap());
     public transfer transfer = new transfer();
+    public PedroMechanism pedro = new PedroMechanism(Constants::create);
 
     /**
      * Creates a method that returns a set of all the mechanisms on our robot
      * @return {@link Set<Mechanism>} with all the subsystems on our bot
      */
+    @NonNull
     @Override
     public Set<Mechanism> getMechanisms() {
-        return Set.of(shooter, intake, slapdown, transfer, drivetrain );
+        return Set.of(shooter);
     }
 //    public Follower getFollower() {
 ////        if (follower == null) {

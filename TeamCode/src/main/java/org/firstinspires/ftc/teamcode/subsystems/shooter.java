@@ -31,9 +31,8 @@ public class shooter implements Mechanism {
 
         double rotationalVelocity = (Math.sqrt(Math.pow(voy,2)+Math.pow(vox, 2)))/radius; //theta/s
 
-        tps = new AngularVelocity(rotationalVelocity * (ticksperrev/(2*(Math.PI))), Units.RadiansPerSecond);
+        tps = new AngularVelocity(rotationalVelocity, Units.RadiansPerSecond);
     }
-
     /**
      * Shoots Pollen Shooter
      * @return shooting command
@@ -74,11 +73,24 @@ public class shooter implements Mechanism {
         return pollenShooter.getEncoderVelocity().getMagnitude();
     }
 
+    public void setKv(double val) {
+        pollenShooter.getVelocityConstants().setKV(val);
+
+    }
+    public void setKp (double val) {
+        pollenShooter.getVelocityConstants().setKP(val);
+    }
+
+    public void setKd(double val) {
+        pollenShooter.getVelocityConstants().setKD(val);
+    }
+
     @Override
     public void periodic() {
-        pollenShooter.getVelocityConstants().setKV(pollenkV);
-        pollenShooter.getVelocityConstants().setKP(pollenP);
-        pollenShooter.getVelocityConstants().setKD(pollenD);
+        //7150 target
+//        pollenShooter.getVelocityConstants().setKV(pollenkV);
+//        pollenShooter.getVelocityConstants().setKP(pollenP);
+//        pollenShooter.getVelocityConstants().setKD(pollenD);
         pollenShooter.update();
         Telemetry.log("shooter vel", pollenShooter.getEncoderVelocity());
         Telemetry.log("tps", tps.getMagnitude());

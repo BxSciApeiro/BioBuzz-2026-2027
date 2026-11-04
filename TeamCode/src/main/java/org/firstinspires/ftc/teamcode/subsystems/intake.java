@@ -13,7 +13,7 @@ import dev.nextftc.robot.Mechanism;
 import dev.nextftc.robot.opmode.NextTeleop;
 @NextTeleop
 public class intake implements Mechanism {
-    private final NextMotor intakeMotor = new NextMotor(RobotController.controlHub(), 0);
+    private final NextMotor intakeMotor = new NextMotor("intake");
 
     /**
      * Creates a command that sets the intake motor forwards
