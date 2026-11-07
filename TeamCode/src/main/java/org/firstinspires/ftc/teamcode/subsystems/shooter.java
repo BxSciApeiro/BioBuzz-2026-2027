@@ -54,7 +54,7 @@ public class shooter implements Mechanism {
      * @return test shooting command
      */
     public Command testShoot() {
-        return instant(() -> pollenShooter.setThrottle(0.5));
+        return instant(() -> pollenShooter.setThrottle(0.75));
     }
 
     public void setVelocity(double vel) {

@@ -31,26 +31,28 @@ public class teleOp extends NextOpMode {
         CommandGamepad gp2 = new CommandGamepad(gamepad2);
 
         //// Intake mechanism gamepad Bindings
-        gp1.leftBumper().onTrue(robot.intake.runIntake());
-        gp1.rightBumper().onTrue(robot.intake.runBackwards());
+        gp1.leftTrigger().isBetween(0.70, 1).toggleOnTrue(robot.intake.runIntake());
+        gp1.rightTrigger().isBetween(0.70, 1).toggleOnTrue(robot.intake.runBackwards());
+        gp1.leftTrigger().isBetween(0.0, 0.69).toggleOnTrue(robot.intake.stopIntake());
+        gp1.rightTrigger().isBetween(0.0, 0.69).toggleOnTrue(robot.intake.stopIntake());
 
         //// Shooting mechanism gamepad Bindings
-        gp1.b().onTrue(robot.shooter.testShoot());
-        gp1.b().onFalse(robot.shooter.testStop());
+        gp1.rightBumper().onTrue(robot.shooter.testShoot());
+        gp1.rightBumper().onFalse(robot.shooter.testStop());
 
 
         //// Transfer/Hopper system gamepad bindings
-        gp2.a().toggleOnTrue(robot.transfer.turnOn());
-        gp2.a().toggleOnFalse(robot.transfer.turnOff());
+        gp2.leftBumper().toggleOnTrue(robot.transfer.turnOn());
+        gp2.leftBumper().toggleOnFalse(robot.transfer.turnOff());
 
         //// Slap down mechanism gamepad bindings
-        gp2.y().toggleOnTrue(robot.slapdown.GoUp());
-        gp2.x().toggleOnTrue(robot.slapdown.GoDown());
+        gp2.a().toggleOnTrue(robot.slapdown.GoUp());
+        gp2.a().toggleOnFalse(robot.slapdown.GoDown());
 
         robot.pedro.follower().manual(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
         /*
-        Total mechanisms listed: 6/6
+        Total mechanisms listed: 4/6???
          */
 
 
