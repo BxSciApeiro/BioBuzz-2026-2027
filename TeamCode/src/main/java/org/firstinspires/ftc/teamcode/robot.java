@@ -1,39 +1,40 @@
 package org.firstinspires.ftc.teamcode;
 
+import androidx.annotation.NonNull;
+
 import com.pedropathing.follower.Follower;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
+import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.intake;
-import org.firstinspires.ftc.teamcode.subsystems.lockingMechanism;
-
 import org.firstinspires.ftc.teamcode.subsystems.shooter;
+import org.firstinspires.ftc.teamcode.subsystems.slapDown;
+import org.firstinspires.ftc.teamcode.subsystems.transfer;
 
 import java.util.Set;
 
+import dev.nextftc.hardware.RobotController;
 import dev.nextftc.robot.Mechanism;
 import dev.nextftc.robot.NextRobot;
+import dev.nextftc.v2.pedro.PedroMechanism;
 
 public class robot implements NextRobot {
-    shooter shooter = new shooter();
-    intake intake = new intake();
-    lockingMechanism locker = new lockingMechanism();
-    public Follower follower;
+    //// Add the mechanisms that MAKE the robot
+    public slapDown slapdown = new slapDown();
+    public shooter shooter = new shooter();
+    public intake intake = new intake();
+    public transfer transfer = new transfer();
+    public PedroMechanism pedro = new PedroMechanism(Constants::create);
 
+    /**
+     * Creates a method that returns a set of all the mechanisms on our robot
+     * @return {@link Set<Mechanism>} with all the subsystems on our bot
+     */
+    @NonNull
     @Override
     public Set<Mechanism> getMechanisms() {
-        return Set.of(shooter, intake, locker);
+        return Set.of(shooter);
     }
-
-    public intake getIntake() {
-        return intake;
-    }
-    public shooter getShooter() {
-        return shooter;
-    }
-    public lockingMechanism getLocker() {
-        return locker;
-    }
-
 //    public Follower getFollower() {
 ////        if (follower == null) {
 ////            follower = Constants.createFollower()
