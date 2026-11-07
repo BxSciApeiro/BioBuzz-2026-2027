@@ -3,12 +3,14 @@ package org.firstinspires.ftc.teamcode;
 import androidx.annotation.NonNull;
 
 import com.pedropathing.follower.Follower;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter;
 import org.firstinspires.ftc.teamcode.subsystems.slapDown;
+import org.firstinspires.ftc.teamcode.subsystems.testRGB;
 import org.firstinspires.ftc.teamcode.subsystems.transfer;
 
 import java.util.Set;
@@ -24,6 +26,7 @@ public class robot implements NextRobot {
     public shooter shooter = new shooter();
     public intake intake = new intake();
     public transfer transfer = new transfer();
+    public testRGB testRGB = new testRGB()
     public PedroMechanism pedro = new PedroMechanism(Constants::create);
 
     /**

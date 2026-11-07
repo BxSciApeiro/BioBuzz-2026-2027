@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode.opModes.teleOps;
+import static com.pedropathing.ivy.commands.Commands.instant;
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.pollenP;
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.pollenD;
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.pollenkV;
 
+import com.pedropathing.ivy.Command;
 import com.pedropathing.ivy.commands.Commands;
 
 import org.firstinspires.ftc.teamcode.robot;
+import org.firstinspires.ftc.teamcode.subsystems.Constants.slapDownConstants;
 
 import dev.nextftc.robot.Telemetry;
 import dev.nextftc.robot.drive.DriveCommands;
@@ -17,6 +20,9 @@ import dev.nextftc.robot.triggers.Trigger;
 @NextTeleop(name = "test")
 public class teleOp extends NextOpMode {
     private final robot robot;
+    private DigitalChannel touch;
+    private DigitalChannel redLED;
+    private DigitalChannel greenLED;
 
     public teleOp(robot robot ) {
         super(robot);
@@ -48,6 +54,12 @@ public class teleOp extends NextOpMode {
         //// Slap down mechanism gamepad bindings
         gp2.a().toggleOnTrue(robot.slapdown.GoUp());
         gp2.a().toggleOnFalse(robot.slapdown.GoDown());
+
+        gp2.dpadLeft().toggleOnTrue(robot.testRGB.turnGreenOn());
+        gp2.dpadLeft().toggleOnFalse(robot.testRGB.turnGreenOff());
+
+        gp2.dpadRight().toggleOnTrue(robot.testRGB.turnRedOn());
+        gp2.dpadRight().toggleOnFalse(robot.testRGB.turnRedOff());
 
         robot.pedro.follower().manual(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
