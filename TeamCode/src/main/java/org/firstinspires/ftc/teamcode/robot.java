@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.subsystems.colorSensor;
 import org.firstinspires.ftc.teamcode.subsystems.intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter;
 import org.firstinspires.ftc.teamcode.subsystems.slapDown;
@@ -28,6 +29,7 @@ public class robot implements NextRobot {
     public transfer transfer = new transfer();
     public testRGB testRGB = new testRGB(RobotController.hardwareMap());
     public PedroMechanism pedro = new PedroMechanism(Constants::create);
+    public colorSensor sensor = new colorSensor();
 
     /**
      * Creates a method that returns a set of all the mechanisms on our robot
@@ -36,7 +38,7 @@ public class robot implements NextRobot {
     @NonNull
     @Override
     public Set<Mechanism> getMechanisms() {
-        return Set.of(shooter);
+        return Set.of(sensor, testRGB, slapdown, intake, transfer, pedro, shooter );
     }
 //    public Follower getFollower() {
 ////        if (follower == null) {
