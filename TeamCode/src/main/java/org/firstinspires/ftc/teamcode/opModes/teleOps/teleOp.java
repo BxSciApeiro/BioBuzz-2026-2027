@@ -20,9 +20,6 @@ import dev.nextftc.robot.triggers.Trigger;
 @NextTeleop(name = "test")
 public class teleOp extends NextOpMode {
     private final robot robot;
-    private DigitalChannel touch;
-    private DigitalChannel redLED;
-    private DigitalChannel greenLED;
 
     public teleOp(robot robot ) {
         super(robot);
@@ -61,12 +58,10 @@ public class teleOp extends NextOpMode {
         gp2.dpadRight().toggleOnTrue(robot.testRGB.turnRedOn());
         gp2.dpadRight().toggleOnFalse(robot.testRGB.turnRedOff());
 
+        gp2.dpadUp().toggleOnTrue(robot.testRGB.turnYellowOn());
+        gp2.dpadUp().toggleOnFalse(robot.testRGB.turnYellowOff());
+
         robot.pedro.follower().manual(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
-
-        /*
-        Total mechanisms listed: 4/6???
-         */
-
 
     }
 

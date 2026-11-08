@@ -26,7 +26,7 @@ public class robot implements NextRobot {
     public shooter shooter = new shooter();
     public intake intake = new intake();
     public transfer transfer = new transfer();
-    public testRGB testRGB = new testRGB()
+    public testRGB testRGB = new testRGB(RobotController.hardwareMap());
     public PedroMechanism pedro = new PedroMechanism(Constants::create);
 
     /**

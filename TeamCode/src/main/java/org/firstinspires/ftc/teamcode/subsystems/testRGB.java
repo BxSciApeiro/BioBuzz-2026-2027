@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import static com.pedropathing.ivy.groups.Groups.parallel;
+
 import com.pedropathing.ivy.Command;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
@@ -9,7 +11,7 @@ import dev.nextftc.robot.Mechanism;
 
 public class testRGB implements Mechanism {
 
-    private NextDigitalSensor redLED = new NextDigitalSensor("red ");
+    private DigitalChannel redLED;
     private DigitalChannel greenLED;
 
     public testRGB(HardwareMap hwmap) {
@@ -20,19 +22,32 @@ public class testRGB implements Mechanism {
         greenLED.setMode(DigitalChannel.Mode.OUTPUT);
     }
     public Command turnRedOn() {
-        redLED.setState(true);
+        return instant(() -> redLED.setState(true));
     }
 
     public Command turnRedOff() {
-        redLED.setState(false);
+        return instant(() -> redLED.setState(false));
     }
 
     public Command turnGreenOn() {
-        greenLED.setState(true);
-        return null;
+        return instant(() -> greenLED.setState(true));
     }
 
     public Command turnGreenOff() {
-        greenLED.setState(false);
+        return instant(() -> greenLED.setState(false));
+    }
+
+    public Command turnYellowOn() {
+        return parallel(
+                turnGreenOn(),
+                turnRedOn()
+        );
+    }
+
+    public Command turnYellowOff() {
+        return parallel(
+                turnGreenOff(),
+                turnRedOff()
+        );
     }
 }
