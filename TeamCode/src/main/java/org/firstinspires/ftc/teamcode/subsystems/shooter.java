@@ -94,7 +94,6 @@ public class shooter implements Mechanism {
         pollenShooter.update();
         Telemetry.log("shooter vel", pollenShooter.getEncoderVelocity());
         Telemetry.log("tps", tps.getMagnitude());
-        Telemetry.update();
     }
 
 }

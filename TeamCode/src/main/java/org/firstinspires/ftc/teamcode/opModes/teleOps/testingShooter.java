@@ -1,18 +1,14 @@
 package org.firstinspires.ftc.teamcode.opModes.teleOps;
 
 import static com.bylazar.telemetry.PanelsTelemetry.INSTANCE;
-import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.instant;
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.pollenD;
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.pollenP;
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.pollenkV;
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.target;
 import com.bylazar.telemetry.TelemetryManager;
-
 import org.firstinspires.ftc.teamcode.robot;
-
 import dev.nextftc.robot.Telemetry;
-import dev.nextftc.robot.opmode.BulkReadHook;
 import dev.nextftc.robot.opmode.NextOpMode;
 import dev.nextftc.robot.opmode.NextTeleop;
 import dev.nextftc.robot.triggers.CommandGamepad;
