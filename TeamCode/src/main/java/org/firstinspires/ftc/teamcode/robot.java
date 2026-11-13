@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.robot.Robot;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.RGB;
+import org.firstinspires.ftc.teamcode.subsystems.SITGroup;
 import org.firstinspires.ftc.teamcode.subsystems.colorSensor;
 import org.firstinspires.ftc.teamcode.subsystems.intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter;
@@ -40,6 +41,7 @@ public class robot implements NextRobot {
         }
         return rgb;
     }
+    public SITGroup SITGroup = new SITGroup(intake, shooter, transfer);
     /**
      * Creates a method that returns a set of all the mechanisms on our robot
      * @return {@link Set<Mechanism>} with all the subsystems on our bot
