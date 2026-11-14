@@ -38,6 +38,11 @@ public class teleOp extends NextOpMode {
         //// Transfer/Hopper system gamepad bindings
         gp2.leftBumper().toggleOnTrue(robot.transfer.turnOn());
         gp2.leftBumper().toggleOnFalse(robot.transfer.turnOff());
+        gp1.dpadRight().toggleOnTrue(robot.aShooter.adjustToNectar());
+        gp1.dpadLeft().toggleOnTrue(robot.aShooter.adjustToPollen());
+        gp1.dpadUp().toggleOnTrue(robot.aShooter.shootNShooter());
+        gp1.dpadDown().toggleOnTrue(robot.aShooter.stopAdjustShooter());
+        gp2.leftBumper().toggleOnTrue(robot.aShooter.shootPShooter());
 
         //// Slap down mechanism gamepad bindings
         gp2.a().toggleOnTrue(robot.slapdown.GoUp());
