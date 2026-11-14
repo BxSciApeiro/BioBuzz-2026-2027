@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.RGB;
 import org.firstinspires.ftc.teamcode.subsystems.SITGroup;
+import org.firstinspires.ftc.teamcode.subsystems.aShooter;
 import org.firstinspires.ftc.teamcode.subsystems.colorSensor;
 import org.firstinspires.ftc.teamcode.subsystems.intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter;
@@ -34,6 +35,7 @@ public class robot implements NextRobot {
     public PedroMechanism pedro = new PedroMechanism(Constants::create);
     public colorSensor sensor = new colorSensor();
     public RGB rgb;
+    public aShooter aShooter = new aShooter();
 
     public RGB getRGB() {
         if (rgb == null) {
@@ -41,7 +43,7 @@ public class robot implements NextRobot {
         }
         return rgb;
     }
-    public SITGroup SITGroup = new SITGroup(intake, shooter, transfer);
+    public SITGroup SITGroup = new SITGroup(intake, shooter, transfer, slapdown);
     /**
      * Creates a method that returns a set of all the mechanisms on our robot
      * @return {@link Set<Mechanism>} with all the subsystems on our bot
@@ -49,7 +51,7 @@ public class robot implements NextRobot {
     @NonNull
     @Override
     public Set<Mechanism> getMechanisms() {
-        return Set.of(shooter );
+        return Set.of(shooter, aShooter, intake, transfer, slapdown );
     }
 
 }

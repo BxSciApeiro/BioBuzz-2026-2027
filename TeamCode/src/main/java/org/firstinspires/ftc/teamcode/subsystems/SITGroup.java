@@ -12,17 +12,21 @@ public class SITGroup implements Mechanism {
     private final shooter shooter;
     private final transfer transfer;
 
-    public SITGroup(intake intake, shooter shooter, transfer transfer) {
+    private final slapDown slapDown;
+
+    public SITGroup(intake intake, shooter shooter, transfer transfer, slapDown slapDown) {
         this.intake = intake;
         this.shooter = shooter;
         this.transfer = transfer;
+        this.slapDown = slapDown;
     }
     public Command ShootSeq() {
         return sequential(
                 shooter.shoot(),
                 waitMs(1000),
                 intake.runIntake(),
-                transfer.turnOn()
+                transfer.turnOn(),
+                waitMs(1000)
         );
     }
     public Command StopShoot() {
@@ -30,6 +34,31 @@ public class SITGroup implements Mechanism {
                 shooter.stop(),
                 intake.stopIntake(),
                 transfer.turnOff()
+        );
+    }
+    public Command ShootNStop(){
+        return sequential(
+                this.ShootSeq(),
+                this.StopShoot()
+        );
+    }
+    public Command takeFromFlower(){
+        return sequential(
+                slapDown.GoDown(),
+                intake.runIntake(),
+                waitMs(1000)
+        );
+    }
+    public Command ReverseTakeFromFlower(){
+        return sequential(
+                slapDown.GoUp(),
+                intake.stopIntake()
+        );
+    }
+    public Command TakeNGo(){
+        return sequential(
+                takeFromFlower(),
+                ReverseTakeFromFlower()
         );
     }
 }
