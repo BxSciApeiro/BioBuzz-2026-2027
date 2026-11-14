@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import static com.pedropathing.ivy.commands.Commands.instant;
 import static com.pedropathing.ivy.groups.Groups.parallel;
 
 import com.pedropathing.ivy.Command;
@@ -21,26 +22,31 @@ public class RGB implements Mechanism {
         greenLED.setMode(DigitalChannel.Mode.OUTPUT);
     }
     public Command turnRedOn() {
-        return instant(() -> redLED.setState(true));
-    }
-
-    public Command turnRedOff() {
         return instant(() -> redLED.setState(false));
     }
 
-    public Command turnGreenOn() {
-        return instant(() -> greenLED.setState(true));
+    public Command turnRedOff() {
+        return instant(() -> redLED.setState(true));
     }
 
-    public Command turnGreenOff() {
+    public Command turnGreenOn() {
         return instant(() -> greenLED.setState(false));
     }
 
+    public Command turnGreenOff() {
+        return instant(() -> greenLED.setState(true));
+    }
+
     public Command turnYellowOn() {
-        return parallel(
+        return instant(() -> {
+            greenLED.setState(false);
+            redLED.setState(false);
+        });
+         /**       }
                 turnGreenOn(),
                 turnRedOn()
         );
+        */
     }
 
     public Command turnYellowOff() {

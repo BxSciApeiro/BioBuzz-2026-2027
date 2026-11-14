@@ -19,8 +19,7 @@ public class intake implements Mechanism {
      * Creates a command that sets the intake motor forwards
      * @return {@link Command} that sets the throttle to a variable
      */
-    public Command runIntake(){
-        return instant(() -> intakeMotor.setThrottle(maxPower));
+    public Command runIntake(){return instant(() -> intakeMotor.setThrottle(maxPower));
     }
 
     /**

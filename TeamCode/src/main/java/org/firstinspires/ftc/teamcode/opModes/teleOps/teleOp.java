@@ -52,14 +52,14 @@ public class teleOp extends NextOpMode {
         gp2.a().toggleOnTrue(robot.slapdown.GoUp());
         gp2.a().toggleOnFalse(robot.slapdown.GoDown());
 
-        gp2.dpadLeft().toggleOnTrue(robot.rgb.turnGreenOn());
-        gp2.dpadLeft().toggleOnFalse(robot.rgb.turnGreenOff());
+        gp2.dpadLeft().toggleOnTrue(robot.getRGB().turnGreenOn());
+        gp2.dpadLeft().toggleOnFalse(robot.getRGB().turnGreenOff());
 
-        gp2.dpadRight().toggleOnTrue(robot.rgb.turnRedOn());
-        gp2.dpadRight().toggleOnFalse(robot.rgb.turnRedOff());
+        gp2.dpadRight().toggleOnTrue(robot.getRGB().turnRedOn());
+        gp2.dpadRight().toggleOnFalse(robot.getRGB().turnRedOff());
 
-        gp2.dpadUp().toggleOnTrue(robot.rgb.turnYellowOn());
-        gp2.dpadUp().toggleOnFalse(robot.rgb.turnYellowOff());
+        gp2.dpadUp().toggleOnTrue(robot.getRGB().turnYellowOn());
+        gp2.dpadUp().toggleOnFalse(robot.getRGB().turnYellowOff());
 
         robot.pedro.follower().manual(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
