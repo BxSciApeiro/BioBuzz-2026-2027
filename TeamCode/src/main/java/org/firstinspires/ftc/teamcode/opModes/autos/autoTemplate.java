@@ -60,6 +60,7 @@ public class autoTemplate extends NextOpMode {
         Command auto = sequential(
                 follow(robot.pedro.follower(), path1()), //use follow command to make the robot follow the path you made
                 robot.shooter.shoot(), //use our commands we made to shoot/intake/transfer
+                robot.slapdown.GoDown(),
                 waitMs(1000), //util commands like wait and instants are also provided
                 robot.shooter.stop(),
                 follow(robot.pedro.follower(), path2())
