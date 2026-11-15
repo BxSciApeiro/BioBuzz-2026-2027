@@ -2,6 +2,11 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.*;
 import com.pedropathing.ivy.Command;
+
+import java.util.Map;
+import java.util.TreeMap;
+
+import dev.nextftc.control.util.InterpolatingMap;
 import dev.nextftc.hardware.actuators.NextMotor;
 import dev.nextftc.robot.Mechanism;
 import dev.nextftc.robot.Telemetry;
@@ -94,6 +99,22 @@ public class shooter implements Mechanism {
         pollenShooter.update();
         Telemetry.log("shooter vel", pollenShooter.getEncoderVelocity());
         Telemetry.log("tps", tps.getMagnitude());
+    }
+
+    public double interpolateRPM(double distance) {
+        InterpolatingMap<Double> RPMinterpolator = InterpolatingMap.linear();
+        RPMinterpolator.put(0.0, 100.0);
+        RPMinterpolator.put(4.0, 50.0);
+
+        return RPMinterpolator.get(distance);
+    }
+
+    public double interpolateTOF(double distance) {
+        InterpolatingMap<Double> TOFInterpolator = InterpolatingMap.linear();
+        TOFInterpolator.put(0.0, 0.1);
+        TOFInterpolator.put(4.0, 10.0);
+
+        return TOFInterpolator.get(distance);
     }
 
 }
