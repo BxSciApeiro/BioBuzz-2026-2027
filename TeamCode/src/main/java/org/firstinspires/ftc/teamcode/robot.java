@@ -2,20 +2,13 @@ package org.firstinspires.ftc.teamcode;
 
 import androidx.annotation.NonNull;
 
-import com.bylazar.opmodecontrol.ActiveOpMode;
-import com.pedropathing.follower.Follower;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.robot.Robot;
-
 import org.firstinspires.ftc.teamcode.pedro.Constants;
-import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.RGB;
 import org.firstinspires.ftc.teamcode.subsystems.SITGroup;
 import org.firstinspires.ftc.teamcode.subsystems.aShooter;
 import org.firstinspires.ftc.teamcode.subsystems.colorSensor;
 import org.firstinspires.ftc.teamcode.subsystems.intake;
-import org.firstinspires.ftc.teamcode.subsystems.shooter;
+import org.firstinspires.ftc.teamcode.subsystems.pShooter;
 import org.firstinspires.ftc.teamcode.subsystems.slapDown;
 import org.firstinspires.ftc.teamcode.subsystems.transfer;
 
@@ -29,7 +22,7 @@ import dev.nextftc.v2.pedro.PedroMechanism;
 public class robot implements NextRobot {
     //// Add the mechanisms that MAKE the robot
     public slapDown slapdown = new slapDown();
-    public shooter shooter = new shooter();
+    public pShooter pShooter = new pShooter();
     public intake intake = new intake();
     public transfer transfer = new transfer();
     public PedroMechanism pedro = new PedroMechanism(Constants::create);
@@ -43,7 +36,7 @@ public class robot implements NextRobot {
         }
         return rgb;
     }
-    public SITGroup SITGroup = new SITGroup(intake, shooter, transfer, slapdown);
+    public SITGroup SITGroup = new SITGroup(intake, pShooter, transfer, slapdown);
     /**
      * Creates a method that returns a set of all the mechanisms on our robot
      * @return {@link Set<Mechanism>} with all the subsystems on our bot
@@ -51,7 +44,7 @@ public class robot implements NextRobot {
     @NonNull
     @Override
     public Set<Mechanism> getMechanisms() {
-        return Set.of(shooter, aShooter, intake, transfer, slapdown );
+        return Set.of(pShooter, aShooter, intake, transfer, slapdown );
     }
 
 }

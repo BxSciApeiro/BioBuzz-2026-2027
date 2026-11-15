@@ -7,7 +7,6 @@ import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import com.pedropathing.api.Paths;
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.ivy.Command;
-import com.pedropathing.ivy.Scheduler;
 import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -59,10 +58,10 @@ public class autoTemplate extends NextOpMode {
         // The opposite of this would be parallel, which runs each command simultaneously
         Command auto = sequential(
                 follow(robot.pedro.follower(), path1()), //use follow command to make the robot follow the path you made
-                robot.shooter.shoot(), //use our commands we made to shoot/intake/transfer
+                robot.pShooter.shoot(), //use our commands we made to shoot/intake/transfer
                 robot.slapdown.GoDown(),
                 waitMs(1000), //util commands like wait and instants are also provided
-                robot.shooter.stop(),
+                robot.pShooter.stop(),
                 follow(robot.pedro.follower(), path2())
         );
 
