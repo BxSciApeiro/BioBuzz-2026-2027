@@ -34,6 +34,7 @@ public class testingShooter extends NextOpMode {
 
     @Override
     public void periodic() {
+        (instant(() -> robot.pShooter.setVelocity(target))).schedule();
         robot.pShooter.setKp(pollenP);
         robot.pShooter.setKd(pollenD);
         robot.pShooter.setKv(pollenkV);
@@ -41,5 +42,6 @@ public class testingShooter extends NextOpMode {
         panelsT.addData("target", target);
         panelsT.update();
         Telemetry.log("RUNNING");
+        Telemetry.update();
     }
 }

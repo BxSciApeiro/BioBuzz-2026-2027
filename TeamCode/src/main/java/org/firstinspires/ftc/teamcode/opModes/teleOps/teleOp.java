@@ -31,8 +31,6 @@ public class teleOp extends NextOpMode {
         gp1.rightTrigger().isBetween(0.0, 0.69).toggleOnTrue(robot.intake.stopIntake());
 
         //// Shooting mechanism gamepad Bindings
-        gp1.rightBumper().onTrue(robot.shooter.testShoot());
-        gp1.rightBumper().onFalse(robot.shooter.testStop());
         gp2.dpadLeft().toggleOnTrue(robot.aShooter.adjustToPollen());
         gp2.dpadRight().toggleOnTrue(robot.aShooter.adjustToNectar());
         gp2.dpadUp().toggleOnTrue(robot.aShooter.shootPShooter());
