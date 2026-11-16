@@ -21,6 +21,8 @@ public class shooterConstant {
     public static double nectarP;
     public static double nectarD;
     public static double target;
+    public static double nectarTarget;
     public static AngularVelocity tps = new AngularVelocity(target, Units.RadiansPerSecond);
+    public static AngularVelocity nectarTPS = new AngularVelocity(nectarTarget, Units.RadiansPerSecond);
 
 }
