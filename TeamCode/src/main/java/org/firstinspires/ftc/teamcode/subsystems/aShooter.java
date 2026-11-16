@@ -5,10 +5,13 @@ import static com.pedropathing.ivy.groups.Groups.parallel;
 
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.nectarD;
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.nectarP;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.nectarTPS;
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.nectarkV;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.offVelocity;
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.pollenD;
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.pollenP;
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.pollenkV;
+import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.tps;
 
 import com.pedropathing.ivy.Command;
 
@@ -53,13 +56,13 @@ public class aShooter implements Mechanism {
     }
 
     public Command shootNShooter(){
-        return instant(()->adjustableShooter.setThrottle(setNThrottle));
+        return instant(()->adjustableShooter.setVelocitySetpoint(nectarTPS));
     }
     public Command shootPShooter(){
-        return instant(()-> adjustableShooter.setThrottle(setPThrottle));
+        return instant(()-> adjustableShooter.setVelocitySetpoint(tps));
     }
     public Command stopAdjustShooter(){
-        return instant(()->adjustableShooter.setThrottle(ThrottleNone));
+        return instant(()->adjustableShooter.setVelocitySetpoint(offVelocity));
     }
 
 }
