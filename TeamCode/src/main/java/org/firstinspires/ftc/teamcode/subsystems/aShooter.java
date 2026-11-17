@@ -11,7 +11,7 @@ public class aShooter implements Mechanism {
     private final NextMotor adjustableShooter = new NextMotor("nectarShooter");
     private final NextServo adjust = new NextServo("ServoAdjust");
 
-    private final double pollenPos = 0.0, nectarPos = 1.0, ThrottleNone = 0.0, setNThrottle = 1.0, setPThrottle = 0.7;
+    private final double pollenPos = 0.0, nectarPos = 1.0, ThrottleNone = 0.0, setNThrottle = 0.7, setPThrottle = 0.7;
 
     public Command adjustToPollen(){
         return instant(()-> adjust.setPosition(pollenPos));
