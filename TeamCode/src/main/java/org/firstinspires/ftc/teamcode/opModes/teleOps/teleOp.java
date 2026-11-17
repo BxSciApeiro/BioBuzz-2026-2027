@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode.opModes.teleOps;
 
+import static java.lang.Math.atan2;
+
 import org.firstinspires.ftc.teamcode.robot;
 import dev.nextftc.robot.Telemetry;
 import dev.nextftc.robot.opmode.NextOpMode;
 import dev.nextftc.robot.opmode.NextTeleop;
 import dev.nextftc.robot.triggers.CommandGamepad;
 import dev.nextftc.robot.triggers.Trigger;
+import com.pedropathing.ivy.Command;
 
 @SuppressWarnings("Class 'teleop' is never used")
 @NextTeleop(name = "test")
@@ -15,6 +18,25 @@ public class teleOp extends NextOpMode {
     public teleOp(robot robot ) {
         super(robot);
         this.robot = robot;
+    }
+    public Command autoAlign(){
+        double yPos = robot.pedro.follower().pose().y(), xPos = robot.pedro.follower().pose().x();
+        double xTarget = 0.0, yTarget = 0.0;
+
+        if (yPos > 70.8){
+            yTarget = 84.8;
+        }else {
+            yTarget = 56.8;
+        }
+        if (xPos > 70.8){
+            xTarget = 84.8;
+        } else {
+            xTarget = 57.8;
+        }
+        double xDiff = xPos - xTarget;
+        double yDiff = yPos - yTarget;
+
+        Math.atan2(yDiff, xDiff);
     }
 
     @Override
@@ -31,8 +53,6 @@ public class teleOp extends NextOpMode {
         gp1.rightTrigger().isBetween(0.0, 0.69).toggleOnTrue(robot.intake.stopIntake());
 
         //// Shooting mechanism gamepad Bindings
-        gp1.rightBumper().onTrue(robot.shooter.testShoot());
-        gp1.rightBumper().onFalse(robot.shooter.testStop());
         gp2.dpadLeft().toggleOnTrue(robot.aShooter.adjustToPollen());
         gp2.dpadRight().toggleOnTrue(robot.aShooter.adjustToNectar());
         gp2.dpadUp().toggleOnTrue(robot.aShooter.shootPShooter());
@@ -63,10 +83,12 @@ public class teleOp extends NextOpMode {
 
         robot.pedro.follower().manual(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
+
     }
 
     @Override
     public void periodic() {
+
         Telemetry.update();
     }
 }

@@ -2,6 +2,11 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import static org.firstinspires.ftc.teamcode.subsystems.Constants.shooterConstant.*;
 import com.pedropathing.ivy.Command;
+
+import java.util.Map;
+import java.util.TreeMap;
+
+import dev.nextftc.control.util.InterpolatingMap;
 import dev.nextftc.hardware.actuators.NextMotor;
 import dev.nextftc.robot.Mechanism;
 import dev.nextftc.robot.Telemetry;
@@ -10,13 +15,13 @@ import dev.nextftc.units.Units;
 import dev.nextftc.units.measuretypes.AngularVelocity;
 
 @NextTeleop
-public class shooter implements Mechanism {
+public class pShooter implements Mechanism {
     public NextMotor pollenShooter = new NextMotor("pollenShooter", anglePerCount);
 
     public NextMotor nectarShooter = new NextMotor("nectarShooter");
 
     //// Constructor that gets velocity constants
-    public shooter() {
+    public pShooter() {
         pollenShooter.getVelocityConstants().withV(pollenkV).withP(pollenP).withD(pollenD);
         nectarShooter.getVelocityConstants().withV(nectarkV);
     }
@@ -49,14 +54,6 @@ public class shooter implements Mechanism {
         return instant(() -> pollenShooter.setVelocitySetpoint(offVelocity));
     }
 
-    /**
-     * A command for testing the shooter
-     * @return test shooting command
-     */
-    public Command testShoot() {
-        return instant(() -> pollenShooter.setThrottle(0.75));
-    }
-
     public void setVelocity(double vel) {
         pollenShooter.setVelocitySetpoint(new AngularVelocity(vel, Units.RadiansPerSecond));
     }
@@ -65,9 +62,6 @@ public class shooter implements Mechanism {
      * Creates a command to stop the shooter in testing
      * @return {@link Command} that sets shooter power to 0
      */
-    public Command testStop() {
-            return instant(() -> pollenShooter.setThrottle(0));
-    }
 
     public double getEncoderVel() {
         return pollenShooter.getEncoderVelocity().getMagnitude();
@@ -92,8 +86,28 @@ public class shooter implements Mechanism {
 //        pollenShooter.getVelocityConstants().setKP(pollenP);
 //        pollenShooter.getVelocityConstants().setKD(pollenD);
         pollenShooter.update();
-        Telemetry.log("shooter vel", pollenShooter.getEncoderVelocity());
-        Telemetry.log("tps", tps.getMagnitude());
+
+        //Here I should make interpolate RPM constantly feed into a double
+        // then, make the gamepad an instant
+        Telemetry.log("Interpolated RPM w distance 10, should ouput -25", interpolateRPM(10));
+        Telemetry.log("Interpolated TOF w distance 10, should ouput 24.85", interpolateTOF(10));
+
+    }
+
+    public double interpolateRPM(double distance) {
+        InterpolatingMap<Double> RPMinterpolator = InterpolatingMap.linear();
+        RPMinterpolator.put(0.0, 100.0);
+        RPMinterpolator.put(4.0, 50.0);
+
+        return RPMinterpolator.get(distance);
+    }
+
+    public double interpolateTOF(double distance) {
+        InterpolatingMap<Double> TOFInterpolator = InterpolatingMap.linear();
+        TOFInterpolator.put(0.0, 0.1);
+        TOFInterpolator.put(4.0, 10.0);
+
+        return TOFInterpolator.get(distance);
     }
 
 }

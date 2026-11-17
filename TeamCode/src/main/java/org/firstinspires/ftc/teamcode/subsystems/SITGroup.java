@@ -9,12 +9,12 @@ import dev.nextftc.robot.Mechanism;
 
 public class SITGroup implements Mechanism {
     private final intake intake;
-    private final shooter shooter;
+    private final pShooter shooter;
     private final transfer transfer;
 
     private final slapDown slapDown;
 
-    public SITGroup(intake intake, shooter shooter, transfer transfer, slapDown slapDown) {
+    public SITGroup(intake intake, pShooter shooter, transfer transfer, slapDown slapDown) {
         this.intake = intake;
         this.shooter = shooter;
         this.transfer = transfer;

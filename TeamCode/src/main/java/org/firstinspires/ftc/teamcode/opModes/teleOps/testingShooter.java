@@ -29,17 +29,19 @@ public class testingShooter extends NextOpMode {
     @Override
     public void start() {
         CommandGamepad gp1 = new CommandGamepad(gamepad1);
-        gp1.b().onTrue(instant(() -> robot.shooter.setVelocity(target)));
+        gp1.b().onTrue(instant(() -> robot.pShooter.setVelocity(target)));
     }
 
     @Override
     public void periodic() {
-        robot.shooter.setKp(pollenP);
-        robot.shooter.setKd(pollenD);
-        robot.shooter.setKv(pollenkV);
-        panelsT.addData("shooter vel, ", robot.shooter.getEncoderVel());
+        (instant(() -> robot.pShooter.setVelocity(target))).schedule();
+        robot.pShooter.setKp(pollenP);
+        robot.pShooter.setKd(pollenD);
+        robot.pShooter.setKv(pollenkV);
+        panelsT.addData("shooter vel, ", robot.pShooter.getEncoderVel());
         panelsT.addData("target", target);
         panelsT.update();
         Telemetry.log("RUNNING");
+        Telemetry.update();
     }
 }
