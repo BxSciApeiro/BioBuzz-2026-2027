@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.opModes.teleOps;
 import static java.lang.Math.atan2;
 
 import org.firstinspires.ftc.teamcode.robot;
+import org.firstinspires.ftc.teamcode.subsystems.COLORGroup;
+
 import dev.nextftc.robot.Telemetry;
 import dev.nextftc.robot.opmode.NextOpMode;
 import dev.nextftc.robot.opmode.NextTeleop;
@@ -37,6 +39,7 @@ public class teleOp extends NextOpMode {
         double yDiff = yPos - yTarget;
 
         Math.atan2(yDiff, xDiff);
+        return null;
     }
 
     @Override
@@ -72,6 +75,7 @@ public class teleOp extends NextOpMode {
         gp2.a().toggleOnTrue(robot.slapdown.GoUp());
         gp2.a().toggleOnFalse(robot.slapdown.GoDown());
 
+        /// gamepad testing rgb light
         gp2.dpadLeft().toggleOnTrue(robot.getRGB().turnGreenOn());
         gp2.dpadLeft().toggleOnFalse(robot.getRGB().turnGreenOff());
 
@@ -84,11 +88,12 @@ public class teleOp extends NextOpMode {
         robot.pedro.follower().manual(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
 
+
     }
 
     @Override
     public void periodic() {
-
+        robot.COLORGroup.Display().schedule();
         Telemetry.update();
     }
 }

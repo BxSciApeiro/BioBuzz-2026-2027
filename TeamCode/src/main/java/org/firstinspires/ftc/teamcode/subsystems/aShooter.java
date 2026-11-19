@@ -65,4 +65,12 @@ public class aShooter implements Mechanism {
         return instant(()->adjustableShooter.setVelocitySetpoint(offVelocity));
     }
 
+    public Command adjustHoodtoNectar() {
+        return instant(()-> adjust.setPosition(nectarPos));
+    }
+
+    public Command adjustHoodtoPollen() {
+        return instant(() -> adjust.setPosition(pollenPos));
+    }
+
 }

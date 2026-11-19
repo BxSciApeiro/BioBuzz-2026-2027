@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import androidx.annotation.NonNull;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
+import org.firstinspires.ftc.teamcode.subsystems.COLORGroup;
 import org.firstinspires.ftc.teamcode.subsystems.RGB;
 import org.firstinspires.ftc.teamcode.subsystems.SITGroup;
 import org.firstinspires.ftc.teamcode.subsystems.aShooter;
@@ -26,17 +27,19 @@ public class robot implements NextRobot {
     public intake intake = new intake();
     public transfer transfer = new transfer();
     public PedroMechanism pedro = new PedroMechanism(Constants::create);
-    public colorSensor sensor = new colorSensor();
-    public RGB rgb;
+    public colorSensor colorSensor = new colorSensor();
+    public RGB RGB;
     public aShooter aShooter = new aShooter();
 
     public RGB getRGB() {
-        if (rgb == null) {
-            rgb = new RGB(RobotController.hardwareMap());
+        if (RGB == null) {
+            RGB = new RGB(RobotController.hardwareMap());
         }
-        return rgb;
+        return RGB;
     }
     public SITGroup SITGroup = new SITGroup(intake, pShooter, transfer, slapdown);
+
+    public COLORGroup COLORGroup = new COLORGroup(getRGB(), colorSensor, aShooter);
     /**
      * Creates a method that returns a set of all the mechanisms on our robot
      * @return {@link Set<Mechanism>} with all the subsystems on our bot
@@ -44,7 +47,7 @@ public class robot implements NextRobot {
     @NonNull
     @Override
     public Set<Mechanism> getMechanisms() {
-        return Set.of(pShooter, aShooter, intake, transfer, slapdown );
+        return Set.of(pShooter, aShooter, intake, transfer, slapdown, COLORGroup, SITGroup);
     }
 
 }
