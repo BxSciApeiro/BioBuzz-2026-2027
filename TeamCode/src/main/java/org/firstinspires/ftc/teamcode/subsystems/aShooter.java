@@ -18,8 +18,30 @@ import com.pedropathing.ivy.Command;
 import dev.nextftc.hardware.actuators.NextMotor;
 import dev.nextftc.hardware.actuators.NextServo;
 import dev.nextftc.robot.Mechanism;
+import dev.nextftc.units.Units;
+import dev.nextftc.units.measuretypes.AngularVelocity;
 
 public class aShooter implements Mechanism {
+    public void setVelocity(double vel) {
+        adjustableShooter.setVelocitySetpoint(new AngularVelocity(vel, Units.RadiansPerSecond));
+    }
+
+    public void setKp(double val) {
+        adjustableShooter.getVelocityConstants().setKP(val);
+    }
+
+    public void setKd(double val) {
+        adjustableShooter.getVelocityConstants().setKD(val);
+    }
+
+    public void setKv(double val) {
+        adjustableShooter.getVelocityConstants().setKV(val);
+    }
+
+    public double getEncoderVel() {
+        return adjustableShooter.getEncoderVelocity().getMagnitude();
+    }
+
     public enum PIDType {
         POLLEN,
         NECTAR
