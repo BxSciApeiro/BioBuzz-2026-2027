@@ -2,6 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 import androidx.annotation.NonNull;
 
+import com.pedropathing.follower.Follower;
+import com.qualcomm.robotcore.robot.Robot;
+
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.RGB;
 import org.firstinspires.ftc.teamcode.subsystems.SITGroup;
@@ -28,6 +31,7 @@ public class robot implements NextRobot {
     public PedroMechanism pedro = new PedroMechanism(Constants::create);
     public colorSensor sensor = new colorSensor();
     public RGB rgb;
+    public Follower follower;
     public aShooter aShooter = new aShooter();
 
     public RGB getRGB() {
@@ -35,6 +39,12 @@ public class robot implements NextRobot {
             rgb = new RGB(RobotController.hardwareMap());
         }
         return rgb;
+    }
+    public Follower getFollower() {
+        if(follower == null) {
+            follower = Constants.create(RobotController.hardwareMap());
+        }
+        return follower;
     }
     public SITGroup SITGroup = new SITGroup(intake, pShooter, transfer, slapdown);
     /**
@@ -44,7 +54,7 @@ public class robot implements NextRobot {
     @NonNull
     @Override
     public Set<Mechanism> getMechanisms() {
-        return Set.of(pShooter, aShooter, intake, transfer, slapdown );
+        return Set.of(pShooter );
     }
 
 }

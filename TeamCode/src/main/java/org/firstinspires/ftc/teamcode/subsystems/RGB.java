@@ -6,41 +6,39 @@ import static com.pedropathing.ivy.groups.Groups.parallel;
 import com.pedropathing.ivy.Command;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.LED;
 
 import dev.nextftc.robot.Mechanism;
 
 public class RGB implements Mechanism {
 
-    private DigitalChannel redLED;
-    private DigitalChannel greenLED;
+    private LED redLED;
+    private LED greenLED;
 
     public RGB(HardwareMap hwmap) {
-        redLED = hwmap.get(DigitalChannel.class, "red");
-        greenLED = hwmap.get(DigitalChannel.class, "green");
-
-        redLED.setMode(DigitalChannel.Mode.OUTPUT);
-        greenLED.setMode(DigitalChannel.Mode.OUTPUT);
+        redLED = hwmap.get(LED.class, "red");
+        greenLED = hwmap.get(LED.class, "green");
     }
     public Command turnRedOn() {
-        return instant(() -> redLED.setState(false));
+        return instant(() -> redLED.on());
     }
 
     public Command turnRedOff() {
-        return instant(() -> redLED.setState(true));
+        return instant(() -> redLED.off());
     }
 
     public Command turnGreenOn() {
-        return instant(() -> greenLED.setState(false));
+        return instant(() -> greenLED.on());
     }
 
     public Command turnGreenOff() {
-        return instant(() -> greenLED.setState(true));
+        return instant(() -> greenLED.off());
     }
 
     public Command turnYellowOn() {
         return instant(() -> {
-            greenLED.setState(false);
-            redLED.setState(false);
+            greenLED.on();
+            redLED.on();
         });
          /**       }
                 turnGreenOn(),
@@ -54,5 +52,13 @@ public class RGB implements Mechanism {
                 turnGreenOff(),
                 turnRedOff()
         );
+    }
+
+    public boolean getGreenState() {
+        return greenLED.isLightOn();
+    }
+
+    public boolean getRedState() {
+        return redLED.isLightOn();
     }
 }

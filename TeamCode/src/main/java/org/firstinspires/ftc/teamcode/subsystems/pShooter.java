@@ -89,8 +89,8 @@ public class pShooter implements Mechanism {
 
         //Here I should make interpolate RPM constantly feed into a double
         // then, make the gamepad an instant
-        Telemetry.log("Interpolated RPM w distance 10, should ouput -25", interpolateRPM(10));
-        Telemetry.log("Interpolated TOF w distance 10, should ouput 24.85", interpolateTOF(10));
+//        Telemetry.log("Interpolated RPM w distance 10, should ouput -25", interpolateRPM(10));
+//        Telemetry.log("Interpolated TOF w distance 10, should ouput 24.85", interpolateTOF(10));
 
     }
 
@@ -98,7 +98,7 @@ public class pShooter implements Mechanism {
         InterpolatingMap<Double> RPMinterpolator = InterpolatingMap.linear();
         RPMinterpolator.put(0.0, 100.0);
         RPMinterpolator.put(4.0, 50.0);
-
+        RPMinterpolator.put(11.0, 10.0);
         return RPMinterpolator.get(distance);
     }
 
@@ -106,7 +106,7 @@ public class pShooter implements Mechanism {
         InterpolatingMap<Double> TOFInterpolator = InterpolatingMap.linear();
         TOFInterpolator.put(0.0, 0.1);
         TOFInterpolator.put(4.0, 10.0);
-
+        TOFInterpolator.put(11.0, 100.0);
         return TOFInterpolator.get(distance);
     }
 
