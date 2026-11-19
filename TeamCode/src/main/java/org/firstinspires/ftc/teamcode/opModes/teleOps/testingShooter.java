@@ -29,7 +29,6 @@ public class testingShooter extends NextOpMode {
     @Override
     public void start() {
         CommandGamepad gp1 = new CommandGamepad(gamepad1);
-        gp1.b().onTrue(instant(() -> robot.pShooter.setVelocity(target)));
     }
 
     @Override

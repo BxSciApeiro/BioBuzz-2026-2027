@@ -3,8 +3,6 @@ package org.firstinspires.ftc.teamcode.opModes.teleOps;
 import static java.lang.Math.atan2;
 
 import org.firstinspires.ftc.teamcode.robot;
-import org.firstinspires.ftc.teamcode.subsystems.COLORGroup;
-
 import dev.nextftc.robot.Telemetry;
 import dev.nextftc.robot.opmode.NextOpMode;
 import dev.nextftc.robot.opmode.NextTeleop;
@@ -39,7 +37,6 @@ public class teleOp extends NextOpMode {
         double yDiff = yPos - yTarget;
 
         Math.atan2(yDiff, xDiff);
-        return null;
     }
 
     @Override
@@ -75,25 +72,24 @@ public class teleOp extends NextOpMode {
         gp2.a().toggleOnTrue(robot.slapdown.GoUp());
         gp2.a().toggleOnFalse(robot.slapdown.GoDown());
 
-        /// gamepad testing rgb light
-        gp2.dpadLeft().toggleOnTrue(robot.getRGB().turnGreenOn());
-        gp2.dpadLeft().toggleOnFalse(robot.getRGB().turnGreenOff());
+        gp2.dpadLeft().whileTrue(robot.getRGB().turnGreenOn());
+        gp2.dpadLeft().onFalse(robot.getRGB().turnGreenOff());
 
-        gp2.dpadRight().toggleOnTrue(robot.getRGB().turnRedOn());
-        gp2.dpadRight().toggleOnFalse(robot.getRGB().turnRedOff());
+        gp2.dpadRight().whileTrue(robot.getRGB().turnRedOn());
+        gp2.dpadRight().onFalse(robot.getRGB().turnRedOff());
 
-        gp2.dpadUp().toggleOnTrue(robot.getRGB().turnYellowOn());
-        gp2.dpadUp().toggleOnFalse(robot.getRGB().turnYellowOff());
+        gp2.dpadUp().whileTrue(robot.getRGB().turnYellowOn());
+        gp2.dpadUp().onFalse(robot.getRGB().turnYellowOff());
 
         robot.pedro.follower().manual(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
-
-
 
     }
 
     @Override
     public void periodic() {
         robot.COLORGroup.Display().schedule();
+        Telemetry.log("green state, " , robot.getRGB().getGreenState());
+        Telemetry.log("red state", robot.getRGB().getRedState());
         Telemetry.update();
     }
 }
