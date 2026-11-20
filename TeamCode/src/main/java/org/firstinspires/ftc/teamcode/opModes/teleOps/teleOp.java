@@ -37,6 +37,7 @@ public class teleOp extends NextOpMode {
         double yDiff = yPos - yTarget;
 
         Math.atan2(yDiff, xDiff);
+        return null;
     }
 
     @Override
@@ -90,6 +91,7 @@ public class teleOp extends NextOpMode {
         robot.COLORGroup.Display().schedule();
         Telemetry.log("green state, " , robot.getRGB().getGreenState());
         Telemetry.log("red state", robot.getRGB().getRedState());
+        Telemetry.log("color sensor", robot.colorSensor.getHue());
         Telemetry.update();
     }
 }
