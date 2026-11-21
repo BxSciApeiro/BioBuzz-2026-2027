@@ -46,6 +46,28 @@ public class robot implements NextRobot {
      * Creates a method that returns a set of all the mechanisms on our robot
      * @return {@link Set<Mechanism>} with all the subsystems on our bot
      */
+
+    public double autoAlign(double y, double x){
+        double yPos = y, xPos = x;
+        double xTarget = 0.0, yTarget = 0.0;
+
+        if (yPos > 70.8){
+            yTarget = 84.8;
+        }else {
+            yTarget = 56.8;
+        }
+        if (xPos > 70.8){
+            xTarget = 84.8;
+        } else {
+            xTarget = 57.8;
+        }
+        double xDiff = xPos - xTarget;
+        double yDiff = yPos - yTarget;
+        double radians = Math.atan2(yDiff, xDiff);
+        return radians;
+    }
+
+
     @NonNull
     @Override
     public Set<Mechanism> getMechanisms() {

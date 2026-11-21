@@ -11,6 +11,8 @@ import dev.nextftc.robot.opmode.NextTeleop;
 import dev.nextftc.robot.triggers.CommandGamepad;
 import dev.nextftc.robot.triggers.Trigger;
 
+import com.pedropathing.controllers.Controller;
+import com.pedropathing.drivetrain.DrivePowers;
 import com.pedropathing.follower.ManualDrive;
 import com.pedropathing.ivy.Command;
 
@@ -22,41 +24,6 @@ public class teleOp extends NextOpMode {
     public teleOp(robot robot ) {
         super(robot);
         this.robot = robot;
-    }
-    public Command autoAlign(){
-        double yPos = robot.pedro.follower().pose().y(), xPos = robot.pedro.follower().pose().x();
-        double xTarget = 0.0, yTarget = 0.0;
-
-        if (yPos > 70.8){
-            yTarget = 84.8;
-        }else {
-            yTarget = 56.8;
-        }
-        if (xPos > 70.8){
-            xTarget = 84.8;
-        } else {
-            xTarget = 57.8;
-        }
-        double xDiff = xPos - xTarget;
-        double yDiff = yPos - yTarget;
-        double radians = Math.atan2(yDiff, xDiff);
-        /* nRadians1 is supposed to stand for normalizedRadians1 and nRadians2
-        stands for normalizedRadians2
-        As of right now if I am correct I think nRadians2 is correct because a circle is 360 degrees
-        so dividing it should be correct. I might be wrong because it should theoretically return
-        180 or -180 because that would be the fastest way to turn the bot and not over 180 or below -180
-        so dividing by 180 could also theoretically work? Not to sure -> Trial and error
-         */
-        double nRadians1 = radians/180;
-        double nRadians2 = radians/360;
-        return instant(()-> robot.pedro.follower().manual(nRadians2,nRadians2,nRadians2));
-
-//        ManualDrive.headingLock(
-//                robot.pedro.follower(),
-//                Constants.foresightConfig.headingFeedback,
-//
-//             radians
-//        );
     }
 
     @Override
@@ -101,8 +68,14 @@ public class teleOp extends NextOpMode {
         gp2.dpadUp().whileTrue(robot.getRGB().turnYellowOn());
         gp2.dpadUp().onFalse(robot.getRGB().turnYellowOff());
 
-        robot.pedro.follower().manual(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
+        DrivePowers drivePower = new DrivePowers(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+        ManualDrive.headingLock(
+                robot.pedro.follower(),
+                (Controller) Constants.foresightConfig.headingFeedback,
+                drivePower,
+                robot.autoAlign(robot.pedro.follower().pose().y(), robot.pedro.follower().pose().x())
+        );
     }
 
     @Override
