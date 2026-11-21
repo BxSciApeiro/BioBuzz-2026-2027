@@ -51,12 +51,12 @@ public class teleOp extends NextOpMode {
         double nRadians2 = radians/360;
         return instant(()-> robot.pedro.follower().manual(nRadians2,nRadians2,nRadians2));
 
-        ManualDrive.headingLock(
-                robot.pedro.follower(),
-                Constants.foresightConfig.headingFeedback,
-
-             radians
-        );
+//        ManualDrive.headingLock(
+//                robot.pedro.follower(),
+//                Constants.foresightConfig.headingFeedback,
+//
+//             radians
+//        );
     }
 
     @Override
@@ -107,9 +107,8 @@ public class teleOp extends NextOpMode {
 
     @Override
     public void periodic() {
-        robot.COLORGroup.Display().schedule();
-        Telemetry.log("green state, " , robot.getRGB().getGreenState());
-        Telemetry.log("red state", robot.getRGB().getRedState());
+        robot.COLORGroup.Display();
+        Telemetry.log("isred?, ", robot.COLORGroup.isRedDetected());
         Telemetry.update();
     }
 }

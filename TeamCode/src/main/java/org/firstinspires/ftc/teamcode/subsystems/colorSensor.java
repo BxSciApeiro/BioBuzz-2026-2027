@@ -28,8 +28,8 @@ public class colorSensor implements Mechanism {
     }
 
     public boolean redDetected(float hue) {
-        double r = Math.abs(hue - 20);
-        if(r <= 4){
+        double r = hue-15;
+        if(r >= 0){
             return true;
         }
         else {

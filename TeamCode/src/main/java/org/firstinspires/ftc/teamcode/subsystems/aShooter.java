@@ -91,8 +91,17 @@ public class aShooter implements Mechanism {
         return instant(()-> adjust.setPosition(nectarPos));
     }
 
+    public Command adjusttoZero() {
+        return instant(() -> adjust.setPosition(0));
+    }
+
+
     public Command adjustHoodtoPollen() {
         return instant(() -> adjust.setPosition(pollenPos));
+    }
+
+    public double getAdjustPosition() {
+        return adjust.getPosition();
     }
 
 }

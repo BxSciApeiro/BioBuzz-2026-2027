@@ -1,14 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static com.pedropathing.ivy.commands.Commands.instant;
-import static com.pedropathing.ivy.groups.Groups.sequential;
-
-import static org.firstinspires.ftc.onbotjava.OnBotJavaWebInterfaceManager.instance;
-
-import com.pedropathing.ivy.Command;
-
 import dev.nextftc.robot.Mechanism;
-import dev.nextftc.robot.Telemetry;
 
 public class COLORGroup implements Mechanism {
     private final colorSensor colorsensor;
@@ -18,22 +10,22 @@ public class COLORGroup implements Mechanism {
             this.colorsensor = colorsensor;
             this.aShooter = aShooter;
     }
-    public Command DetectRed(){
-            return aShooter.adjustHoodtoNectar();
-    }
-    public Command DetectYellow(){
-        return aShooter.adjustHoodtoPollen();
+
+    public boolean isRedDetected() {
+        return colorsensor.redDetected(colorsensor.getHue());
     }
 
 
-    public Command Display(){
+
+
+    public void Display(){
         if(colorsensor.redDetected(colorsensor.getHue())){
-            return DetectRed();
+            aShooter.adjustHoodtoNectar().schedule();
+        } else if (colorsensor.yellowDetected(colorsensor.getHue())){
+            aShooter.adjustHoodtoPollen().schedule();
+        } else {
+            aShooter.adjusttoZero().schedule();
         }
-        if(colorsensor.yellowDetected(colorsensor.getHue())){
-            return DetectYellow();
-        }
-        return null;
     }
 
 }
