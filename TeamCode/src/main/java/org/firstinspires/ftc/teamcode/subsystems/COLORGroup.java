@@ -20,9 +20,9 @@ public class COLORGroup implements Mechanism {
 
     public void Display(){
         if(colorsensor.redDetected(colorsensor.getHue())){
-            aShooter.adjustHoodtoNectar().schedule();
+            //aShooter.adjustHoodtoNectar().schedule();
         } else if (colorsensor.yellowDetected(colorsensor.getHue())){
-            aShooter.adjustHoodtoPollen().schedule();
+            //aShooter.adjustHoodtoPollen().schedule();
         } else {
             aShooter.adjusttoZero().schedule();
         }

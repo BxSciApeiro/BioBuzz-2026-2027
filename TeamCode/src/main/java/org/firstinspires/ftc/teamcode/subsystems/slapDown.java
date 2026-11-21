@@ -17,17 +17,32 @@ public class slapDown implements Mechanism {
 
     /**
      * Makes the slapdown go up
+     *
      * @return Command
      */
-    public Command GoUp(){
+    public Command GoUp() {
         return instant(() -> slapDown.setPosition(slapDownConstants.TopPos));
     }
 
     /**
      * Makes the slapdown go down.
+     *
      * @return Command
      */
-    public Command GoDown(){
-        return instant(()-> slapDown.setPosition(slapDownConstants.BottomPos));
+    public Command GoDown() {
+        return instant(() -> slapDown.setPosition(slapDownConstants.BottomPos));
+    }
+
+    public Command TestGoUp(double pos) {
+        return instant(() -> slapDown.setPosition(pos));
+    }
+
+    /**
+     * Makes the slapdown go down.
+     *
+     * @return Command
+     */
+    public Command TestGoDown(double pos) {
+        return instant(() -> slapDown.setPosition(pos));
     }
 }

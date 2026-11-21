@@ -87,8 +87,8 @@ public class aShooter implements Mechanism {
         return instant(()->adjustableShooter.setVelocitySetpoint(offVelocity));
     }
 
-    public Command adjustHoodtoNectar() {
-        return instant(()-> adjust.setPosition(nectarPos));
+    public Command adjustHoodtoNectar(double pos) {
+        return instant(()-> adjust.setPosition(pos));
     }
 
     public Command adjusttoZero() {
@@ -96,8 +96,8 @@ public class aShooter implements Mechanism {
     }
 
 
-    public Command adjustHoodtoPollen() {
-        return instant(() -> adjust.setPosition(pollenPos));
+    public Command adjustHoodtoPollen(double pos) {
+        return instant(() -> adjust.setPosition(pos));
     }
 
     public double getAdjustPosition() {
